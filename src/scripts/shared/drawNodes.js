@@ -13,7 +13,8 @@ export default (svg, simulation, nodes, link = null) => {
     })
     .attr('pointer-events', 'all')
     .on('click', function (d) {
-      alert(d);
+      if (d3.event.defaultPrevented) return;
+      alert(d.id);
     })
     .call(d3.drag()
       .on('start', dragstarted)
