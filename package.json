@@ -35,6 +35,7 @@
     "webpack-stream": "^4.0.0"
   },
   "dependencies": {
+    "d3v4": "^4.2.2",
     "normalize.css": "^7.0.0"
   }
 }

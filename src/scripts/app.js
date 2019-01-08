@@ -1,5 +1,7 @@
+import index from './index';
+
 const app = () => {
-  console.log("test");
+  index();
 };
 
 app();

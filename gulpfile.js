@@ -20,7 +20,7 @@ gulp.task('scripts', () => {
 
 gulp.task('connect', () => {
   connect.server({
-    port: 3000,
+    port: 5000,
     root: 'dist',
     livereload: true
   });
