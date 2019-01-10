@@ -15,7 +15,7 @@ const pug = require('gulp-pug');
 gulp.task('scripts', () => {
   return gulp.src('./src/scripts/**/*')
     .pipe(webpack(require('./webpack.config.js')))
-    .pipe(gulp.dest('./dist/scripts'))
+    .pipe(gulp.dest('./dist/scripts'));
 });
 
 gulp.task('connect', () => {
@@ -45,17 +45,23 @@ gulp.task('styles', () => {
 // compress images
 gulp.task('images', () => {
   gulp.src('./src/images/**/*')
-  .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
-  .pipe(gulp.dest('./dist/images/'))
-  .pipe(connect.reload());
+    .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
+    .pipe(gulp.dest('./dist/images/'))
+    .pipe(connect.reload());
 });
 
 // diff views
 gulp.task('html', () => {
   gulp.src('./src/*.pug')
-  .pipe(pug())
-  .pipe(gulp.dest('./dist'))
-  .pipe(connect.reload());
+    .pipe(pug())
+    .pipe(gulp.dest('./dist'))
+    .pipe(connect.reload());
+});
+
+// json
+gulp.task('json', () => {
+  gulp.src('./src/api/*.json')
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('watch', () => {
@@ -65,5 +71,5 @@ gulp.task('watch', () => {
 });
 
 
-gulp.task('default', ['connect', 'html', 'styles', 'images', 'scripts', 'watch']);
+gulp.task('default', ['connect', 'html',  'json', 'styles', 'images', 'scripts', 'watch']);
 gulp.task('build', ['styles', 'images', 'scripts']);
