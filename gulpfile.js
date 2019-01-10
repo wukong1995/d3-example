@@ -52,7 +52,7 @@ gulp.task('images', () => {
 
 // diff views
 gulp.task('html', () => {
-  gulp.src('./src/index.pug')
+  gulp.src('./src/*.pug')
   .pipe(pug())
   .pipe(gulp.dest('./dist'))
   .pipe(connect.reload());
