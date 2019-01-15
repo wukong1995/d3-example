@@ -11,7 +11,7 @@ export default () => {
 
   // draw
   const link = svg.append('g')
-    .attr('class', 'link')
+    .attr('class', 'container')
     .selectAll('line')
     .data(graph.links)
     .enter().append('line')

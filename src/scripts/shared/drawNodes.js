@@ -2,12 +2,18 @@ import * as d3 from 'd3v4';
 export default (svg, simulation, nodes, link = null) => {
   const color = d3.scaleOrdinal(d3.schemeCategory20);
   const node = svg.append('g')
-    .attr('class', 'node')
-    .selectAll('circle')
+    .attr('class', 'container')
+    .selectAll('node')
     .data(nodes)
     .enter()
-    .append('circle')
-    .attr('r', 40)
+    .append('g');
+
+  node.append('circle')
+    .attr('r', function () {
+      // if (d.id === main.id) return 50;
+      return 30;
+      // return parseInt(40 * Math.random(), 10);
+    })
     .attr('fill', function (d) {
       return color(d.group);
     })
@@ -20,12 +26,7 @@ export default (svg, simulation, nodes, link = null) => {
       .on('start', dragstarted)
       .on('drag', dragged)
       .on('end', dragended));
-
-  const text = svg.append('g')
-    .attr('class', 'labels')
-    .selectAll('text')
-    .data(nodes)
-    .enter().append('text')
+  node.append('text')
     .attr('dy', 2)
     .attr('text-anchor', 'middle')
     .text(function (d) {
@@ -70,19 +71,8 @@ export default (svg, simulation, nodes, link = null) => {
           return d.target.y;
         });
     }
-    node
-      .attr('cx', function (d) {
-        return d.x;
-      })
-      .attr('cy', function (d) {
-        return d.y;
-      });
-    text
-      .attr('x', function (d) {
-        return d.x;
-      })
-      .attr('y', function (d) {
-        return d.y;
-      });
+    node.attr('transform', function (d) {
+      return 'translate(' + [d.x, d.y] + ')';
+    });
   }
 };
